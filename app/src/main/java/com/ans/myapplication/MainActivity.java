@@ -2,6 +2,7 @@ package com.ans.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,16 +18,18 @@ public class MainActivity extends AppCompatActivity {
     private Button Login;
     private int counter = 3;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Name = (EditText)findViewById(R.id.etName);
-        Passworrd = (EditText)findViewById(R.id.etPass);
-        Info = (TextView)findViewById(R.id.etat);
+        Passworrd = (EditText)findViewById(R.id.etPassword);
+        Info = (TextView)findViewById(R.id.tvInfo);
         Login=(Button)findViewById(R.id.btnLogin);
 
         Info.setText("No. of attempts remaining: 3");
+
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void validate(String userName, String userPassword) {
-        if ((userName.equals("Admin")) && (userPassword == "1234")) {
+        if ((userName.equals("Admin")) && (userPassword.equals("1234")) ){
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             startActivity(intent);
         } else {
